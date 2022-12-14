@@ -1,4 +1,6 @@
 # Object Detection in an Urban Environment
+### Project overview
+This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
 
 ## Data
 
@@ -59,10 +61,6 @@ python download_process.py --data_dir {processed_file_location} --size {number o
 
 You are downloading 100 files (unless you changed the `size` parameter) so be patient! Once the script is done, you can look inside your `data_dir` folder to see if the files have been downloaded and processed correctly.
 
-### Classroom Workspace
-
-In the classroom workspace, every library and package should already be installed in your environment. You will NOT need to make use of `gcloud` to download the images.
-
 ## Instructions
 
 ### Exploratory Data Analysis
@@ -70,7 +68,6 @@ In the classroom workspace, every library and package should already be installe
 You should use the data already present in `/home/workspace/data/waymo` directory to explore the dataset! This is the most important task of any machine learning project. To do so, open the `Exploratory Data Analysis` notebook. In this notebook, your first task will be to implement a `display_instances` function to display images and annotations using `matplotlib`. This should be very similar to the function you created during the course. Once you are done, feel free to spend more time exploring the data and report your findings. Report anything relevant about the dataset in the writeup.
 
 Keep in mind that you should refer to this analysis to create the different spits (training, testing and validation).
-
 
 ### Create the training - validation splits
 In the class, we talked about cross-validation and the importance of creating meaningful training and validation splits. For this project, you will have to create your own training and validation sets using the files located in `/home/workspace/data/waymo`. The `split` function in the `create_splits.py` file does the following:
@@ -81,6 +78,9 @@ Use the following command to run the script once your function is implemented:
 ```
 python create_splits.py --data-dir /home/workspace/data
 ```
+### Train dataset with groundtruth box
+![Train Data Image](https://github.com/maulikkhunt19/object_detection/blob/main/data/train_data.png)
+
 
 ### Edit the config file
 
@@ -110,7 +110,14 @@ python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeli
 **Note**: Both processes will display some Tensorflow warnings, which can be ignored. You may have to kill the evaluation script manually using
 `CTRL+C`.
 
-To monitor the training, you can launch a tensorboard instance by running `python -m tensorboard.main --logdir experiments/reference/`. You will report your findings in the writeup.
+To monitor the training, you can launch a tensorboard instance by running `python -m tensorboard.main --logdir experiments/reference/`. 
+
+#### Reference experiment
+To manage the proper resources provided by Udacity, we didn't include all the experiments. Last experiment, I get the training chart with loss and learning rate is as shown in below graph.
+
+![Loss](https://user-images.githubusercontent.com/104901583/207721119-f3f2e090-917d-4ec7-983e-44b80e1ec89c.png)
+![learning rate](https://user-images.githubusercontent.com/104901583/207721140-64650b44-cc07-4f6e-8661-c037778b3aa1.png)
+
 
 ### Improve the performances
 
@@ -121,6 +128,13 @@ Keep in mind that the following are also available:
 * experiment with the architecture. The Tf Object Detection API [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) offers many architectures. Keep in mind that the `pipeline.config` file is unique for each architecture and you will have to edit it.
 
 **Important:** If you are working on the workspace, your storage is limited. You may to delete the checkpoints files after each experiment. You should however keep the `tf.events` files located in the `train` and `eval` folder of your experiments. You can also keep the `saved_model` folder to create your videos.
+   
+#### Improve on the reference
+I used SGD with momentum with the learning rate of 5e-4 and total 5000 steps but after 3000 steps model starts to overfitting for our given dataset. However, training loss was still decreasing. Also, we set warmup steps to 300.
+Precision and recall graph is shown below for our trained model on last checkpoints. 
+
+![Precision](https://user-images.githubusercontent.com/104901583/207723025-1bbe223d-012e-4a06-a276-17e74f1947a9.png)
+![Recall](https://user-images.githubusercontent.com/104901583/207723030-647182f4-abdf-43d3-ba8f-deb71801facd.png)
 
 
 ### Creating an animation
@@ -138,30 +152,6 @@ Finally, you can create a video of your model's inferences for any tf record fil
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
 
-### Project overview
-This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
-
-### Dataset
-#### Dataset analysis
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
-#### Cross validation
-This section should detail the cross validation strategy and justify your approach.
-
-### Training
-#### Reference experiment
-To manage the proper resources provided by Udacity, we didn't include all the experiments. Last experiment, I get the training chart with loss and learning rate is as shown in below graph.
-
-![Loss](https://user-images.githubusercontent.com/104901583/207721119-f3f2e090-917d-4ec7-983e-44b80e1ec89c.png)
-![learning rate](https://user-images.githubusercontent.com/104901583/207721140-64650b44-cc07-4f6e-8661-c037778b3aa1.png)
-
-#### Improve on the reference
-I used SGD with momentum with the learning rate of 5e-4 and total 5000 steps but after 3000 steps model starts to overfitting for our given dataset. However, training loss was still decreasing. Also, we set warmup steps to 300.
-Precision and recall graph is shown below for our trained model on last checkpoints. 
-
-![Precision](https://user-images.githubusercontent.com/104901583/207723025-1bbe223d-012e-4a06-a276-17e74f1947a9.png)
-![Recall](https://user-images.githubusercontent.com/104901583/207723030-647182f4-abdf-43d3-ba8f-deb71801facd.png)
-
 #### Test Results
-
 ![test 1](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/test0gif)
 
