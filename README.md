@@ -138,13 +138,8 @@ Finally, you can create a video of your model's inferences for any tf record fil
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
 
-## Submission Template
-
 ### Project overview
 This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
-
-### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
 
 ### Dataset
 #### Dataset analysis
@@ -154,7 +149,18 @@ This section should detail the cross validation strategy and justify your approa
 
 ### Training
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
+To manage the proper resources provided by Udacity, we didn't include all the experiments. Last experiment, I get the training chart with loss and learning rate is as shown in below graph.
+
+![Loss](https://user-images.githubusercontent.com/104901583/207721119-f3f2e090-917d-4ec7-983e-44b80e1ec89c.png)
+![learning rate](https://user-images.githubusercontent.com/104901583/207721140-64650b44-cc07-4f6e-8661-c037778b3aa1.png)
 
 #### Improve on the reference
-This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
+I used SGD with momentum with the learning rate of 5e-4 and total 5000 steps but after 3000 steps model starts to overfitting for our given dataset. However, training loss was still decreasing. Also, we set warmup steps to 300.
+Precision and recall graph is shown below for our trained model on last checkpoints. 
+
+![Precision](https://user-images.githubusercontent.com/104901583/207723025-1bbe223d-012e-4a06-a276-17e74f1947a9.png)
+![Recall](https://user-images.githubusercontent.com/104901583/207723030-647182f4-abdf-43d3-ba8f-deb71801facd.png)
+
+#### Test Results
+
+ 
