@@ -150,5 +150,5 @@ python inference_video.py --labelmap_path label_map.pbtxt --model_path experimen
 ```
 
 #### Test Results
-![test 1](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/test0gif)
+![test 1](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/test0.gif)
 
