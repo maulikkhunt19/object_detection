@@ -164,3 +164,4 @@ Precision and recall graph is shown below for our trained model on last checkpoi
 #### Test Results
 
 ![test 1](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/test%202.gif)
+<img src="https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/test%203.gif" width="80" height="80" />
