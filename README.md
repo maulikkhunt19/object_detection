@@ -158,8 +158,8 @@ To monitor the training, you can launch a tensorboard instance by running `pytho
 #### Reference experiment
 To manage the proper resources provided by Udacity, we didn't include all the experiments. Last experiment, I get the training chart with loss and learning rate is as shown in below graph.
 
-![Loss](https://user-images.githubusercontent.com/104901583/207721119-f3f2e090-917d-4ec7-983e-44b80e1ec89c.png)
-![learning rate](https://user-images.githubusercontent.com/104901583/207721140-64650b44-cc07-4f6e-8661-c037778b3aa1.png)
+![Loss](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/Loss.png)
+![learning rate](https://github.com/maulikkhunt19/object_detection/blob/main/test%20result/Learning%20rate.png)
 
 
 ### Improve the performances
@@ -171,7 +171,8 @@ Keep in mind that the following are also available:
 * experiment with the architecture. The Tf Object Detection API [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) offers many architectures. Keep in mind that the `pipeline.config` file is unique for each architecture and you will have to edit it.
 
 #### Improve on the reference
-I used SGD with momentum with the learning rate of 5e-4 and total 5000 steps but after 3000 steps model starts to overfitting for our given dataset. However, training loss was still decreasing. Also, we set warmup steps to 300.
+I used SGD with momentum with the learning rate of 5e-4 and total 5000 steps but after 3000 steps model starts to overfitting for our given dataset. However, training loss was still decreasing. Also, we set warmup steps to 300. ANd in addition to data augmentation, you can see the different method i applied to dataset abovw which will help you to avoid overfitting due to lack of data resources. 
+
 Precision and recall graph is shown below for our trained model on last checkpoints. 
 
 ![Precision](https://user-images.githubusercontent.com/104901583/207723025-1bbe223d-012e-4a06-a276-17e74f1947a9.png)
