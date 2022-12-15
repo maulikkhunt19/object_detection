@@ -81,6 +81,50 @@ python create_splits.py --data-dir /data
 ### Train dataset with groundtruth box
 ![Train Data Image](https://github.com/maulikkhunt19/object_detection/blob/main/data/train_data.png)
 
+#### Class distribution over random 10000 images
+
+![image](https://user-images.githubusercontent.com/104901583/207835770-a96b17c6-c57a-40d8-8442-d2d9c6b3d4b4.png)
+
+###
+Here, To increase the number of image to get the better result and avoid overfitting, i tried to implement Augmentation of dataset images using various methods like cropping the image, rotating the image, changes in contrast and brightness, and many more ways to increase the dataset. 
+
+You can add this configuration to your pipeline.config file. also you can some modification in the given config.
+```
+data_augmentation_options {
+    random_crop_image {
+      min_object_covered: 0.0
+      min_aspect_ratio: 0.75
+      max_aspect_ratio: 3.0
+      min_area: 0.75
+      max_area: 1.0
+      overlap_thresh: 0.0
+    }
+  }
+  data_augmentation_options {
+      random_adjust_brightness{  
+    }
+  }
+  data_augmentation_options {
+      random_adjust_contrast{
+    }
+  }
+  data_augmentation_options {
+      random_adjust_hue{
+    }
+  }
+  data_augmentation_options {
+      random_adjust_saturation{
+    }
+  }
+  data_augmentation_options {
+      random_distort_color{
+    }
+  }
+```
+As below, there are some images after augmentations.
+
+![Augmented Images](https://github.com/maulikkhunt19/object_detection/blob/main/data/Augmented_data.png)
+
 ### Edit the config file
 
 Now you are ready for training. As we explain during the course, the Tf Object Detection API relies on **config files**. The config that we will use for this project is `pipeline.config`, which is the config for a SSD Resnet 50 640x640 model. You can learn more about the Single Shot Detector [here](https://arxiv.org/pdf/1512.02325.pdf).
